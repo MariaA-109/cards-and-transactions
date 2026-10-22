@@ -83,9 +83,14 @@ Please provide:
 * a short `README` explaining:
 
   * how to run the project:
-    - yarn dev
+    - yarn dev, yarn or yarn test
   * assumptions or tradeoffs you made:
+    - Simulated API with delay 
     - I used Mantine because I already use it at work and it saves time on basic components.
+    - I select the first card by default, so the page is not empty when it loads.
+    setSelectedCardId(cardsData[0]?.id ?? null);
   * what you would improve with more time
+    - Responsive design
+    - Error with Retry button 
 
 The goal of this exercise is to understand your technical decisions and development approach when implementing a real feature.
