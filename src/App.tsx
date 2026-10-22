@@ -1,10 +1,19 @@
 import "./App.css";
+import { Flex, Title } from "@mantine/core";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Cards & Transactions</h1>
-    </div>
+    <Flex
+      className="App"
+      gap="md"
+      justify="center"
+      align="center"
+      direction="row"
+      wrap="wrap"
+      m="xl"
+    >
+      <Title>Cards & Transactions</Title>
+    </Flex>
   );
 }
 
