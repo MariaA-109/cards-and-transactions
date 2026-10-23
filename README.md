@@ -1,4 +1,35 @@
-# Cards & Transactions Overview – Frontend Exercise
+# Explanation
+
+## How to run the project
+
+Requires Node 20.19+ or 22.12+ and Yarn.
+
+```bash
+git clone https://github.com/MariaA-109/cards-and-transactions.git
+cd cards-and-transactions
+yarn
+yarn dev
+```
+To run the tests: `yarn test`.
+  
+## Assumptions or tradeoffs I made
+* Simulated API: `src/api.ts` exposes async functions (`fetchCards`, `fetchTransactions`) with a small delay. The components never import the JSON directly, so replacing it with real requests would only change that file.
+* Mantine: I used it because I already work with it and it saves time on basic components.
+* Default card: the first card is selected when the page loads, so the page is not empty.
+* Filter: it keeps transactions with an amount greater than or equal to the value. It accepts negative and decimal values, because the data contains both (a refund of -100). Letters and symbols are not accepted by the input. The filter resets when the card changes.
+* Currency: amounts are shown without a currency symbol, because the data does not include one.
+
+## Testing
+I added one basic test to set up the testing environment (Vitest and Testing Library) and show how I would test the app. I have not written automated tests in a project before, and I would like to learn it on the job.
+
+## What I would improve with more time
+* More tests: the filter, the card switching and the error states.
+* A responsive layout.
+* An error message with a retry button.
+* Validation of the API responses with Zod.
+
+
+# Original exercise: Cards & Transactions Overview
 
 This exercise is a small frontend application that simulates a banking-style overview page.
 
@@ -74,29 +105,4 @@ A well-structured and maintainable solution with clear organization and thoughtf
 ### Senior
 
 A solution that reflects engineering maturity and consideration for long-term maintainability and scalability.
-
-## What to Include in Your Submission
-
-## Explanation:
-
-  # How to run the project:
-    * git clone https://github.com/MariaA-109/cards-and-transactions.git
-    * cd cards-and-transactions
-    * yarn
-    * yarn dev
-  To run the tests: `yarn test`.
-  # Assumptions or tradeoffs you made:
-    - **Simulated API:** `src/api.ts` exposes async functions (`fetchCards`, `fetchTransactions`) with a small delay. The components never import the JSON directly, so replacing it with real requests would only change that file.
-    - **Mantine:** I used it because I already work with it and it saves time on basic components.
-    - **Default card:** the first card is selected when the page loads, so the page is not empty.
-    - **Filter:** it keeps transactions with an amount greater than or equal to the value. It accepts negative and decimal values, because the data contains both (a refund of -100). Letters and symbols are not accepted by the input. The filter resets when the card changes.
-    - **Currency:** amounts are shown without a currency symbol, because the data does not include one.
-    ## Testing
-    I added one basic test to set up the testing environment (Vitest and Testing Library) and show how I would test the app. I have not written automated tests in a project before, and I would like to learn it on the job.
-
-  ## What you would improve with more time
-    - More tests: the filter, the card switching and the error states.
-    - A responsive layout.
-    - An error message with a retry button.
-    - Validation of the API responses with Zod.
 
