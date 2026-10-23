@@ -5,6 +5,7 @@ import { fetchCards, fetchTransactions } from "./api";
 import type { Card, Transaction } from "./types";
 import { CardItem } from "./components/CardItem";
 import { TransactionList } from "./components/TransactionList";
+import { FilterField } from "./components/Filter";
 
 type Status = "loading" | "success" | "error";
 
@@ -15,6 +16,7 @@ function App() {
   const [status, setStatus] = useState<Status>("loading");
   const [transactionsStatus, setTransactionsStatus] =
     useState<Status>("loading");
+  const [filter, setFilter] = useState<number | string>("");
 
   useEffect(() => {
     async function loadCards() {
@@ -48,6 +50,18 @@ function App() {
     loadTransactions(selectedCardId);
   }, [selectedCardId]);
 
+  const handleSelectCard = (cardId: string) => {
+    setSelectedCardId(cardId);
+    setFilter("");
+  };
+
+  const minAmount = filter === "" ? null : Number(filter);
+
+  const filteredTransactons =
+    minAmount === null || Number.isNaN(minAmount)
+      ? transactions
+      : transactions.filter((transaction) => transaction.amount >= minAmount);
+
   return (
     <Stack
       className="App"
@@ -55,6 +69,7 @@ function App() {
       m="auto"
       w="fit-content"
       maw="100%"
+      mt="xl"
       align="center"
       justify="center"
     >
@@ -81,16 +96,17 @@ function App() {
               key={card.id}
               card={card}
               isSelected={card.id === selectedCardId}
-              onSelect={setSelectedCardId}
+              onSelect={handleSelectCard}
             />
           ))}
         </Flex>
       )}
-      {status === "success" && !selectedCardId && (
-        <Text c="dimmed">Select a card to see its transactions.</Text>
-      )}
+
       {selectedCardId && transactionsStatus === "loading" && (
         <Loader aria-label="Loading transactions" />
+      )}
+      {selectedCardId && transactionsStatus === "success" && (
+        <FilterField value={filter} onChange={setFilter} />
       )}
       {selectedCardId && transactionsStatus === "error" && (
         <Alert color="red" title="Something went wrong">
@@ -98,7 +114,7 @@ function App() {
         </Alert>
       )}
       {selectedCardId && transactionsStatus === "success" && (
-        <TransactionList transactions={transactions} />
+        <TransactionList transactions={filteredTransactons} />
       )}
     </Stack>
   );
