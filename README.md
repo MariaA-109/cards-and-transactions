@@ -10,6 +10,9 @@ cd cards-and-transactions
 yarn
 yarn dev
 ```
+
+The app runs at http://localhost:5173 (the exact address is shown in the terminal).
+
 To run the tests: `yarn test`.
   
 ## Assumptions or tradeoffs I made
