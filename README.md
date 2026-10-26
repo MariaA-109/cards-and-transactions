@@ -16,7 +16,7 @@ To run the tests: `yarn test`.
 * Simulated API: `src/api.ts` exposes async functions (`fetchCards`, `fetchTransactions`) with a small delay. The components never import the JSON directly, so replacing it with real requests would only change that file.
 * Mantine: I used it because I already work with it and it saves time on basic components.
 * Default card: the first card is selected when the page loads, so the page is not empty.
-* Filter: it keeps transactions with an amount greater than or equal to the value. It accepts negative and decimal values, because the data contains both (a refund of -100). Letters and symbols are not accepted by the input. The filter resets when the card changes.
+* Filter: it keeps transactions with an amount greater than or equal to the value. It accepts negative and decimal values, because the data contains both (a refund of -100). Letters are not accepted by the input. The filter resets when the card changes.
 * Currency: amounts are shown without a currency symbol, because the data does not include one.
 
 ## Testing
@@ -27,6 +27,8 @@ I added one basic test to set up the testing environment (Vitest and Testing Lib
 * A responsive layout.
 * An error message with a retry button.
 * Validation of the API responses with Zod.
+* Currency format: Display amounts using Intl.NumberFormat when the data includes currency.
+* View transaction details.
 
 
 # Original exercise: Cards & Transactions Overview
